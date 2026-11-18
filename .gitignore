@@ -1,2 +1,9 @@
-kit/
-.vercel/
+node_modules/
+dist/
+dist-ssr/
+.env
+.env.*
+!.env.example
+.DS_Store
+.vercel
+*.zip

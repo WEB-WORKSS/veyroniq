@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #ffffff;
+  --color-bg-2: #f6f8fb;
+  --color-panel: #ffffff;
+  --color-panel-2: #f1f4f9;
+  --color-line: #e3e8ef;
+  --color-line-2: #cdd5e1;
+  --color-ink: #0b1324;
+  --color-muted: #4a5568;
+  --color-faint: #6b7789;
+  --color-blue: #1f5bf0;
+  --color-blue-2: #1849c4;
+  --color-cyan: #0e7490;
+  --color-ok: #0f8a5f;
+  --color-warn: #a16207;
+  --color-crit: #d33a42;
+  --color-off: #94a3b8;
+  --font-display: "Archivo", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-sans); }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: rgba(31, 91, 240, 0.18); }
+  input, select, textarea { color-scheme: light; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6; }
+  .eyebrow { @apply font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-cyan; }
+  .h2 { @apply font-display text-[clamp(1.9rem,4vw,2.8rem)] font-extrabold leading-[1.08]; }
+  .lede { @apply mt-4 text-[1.05rem] leading-relaxed text-muted; }
+  .card { @apply rounded-2xl border border-line bg-panel shadow-[0_1px_2px_rgba(15,23,42,.04)]; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-[10px] px-4 py-2.5 text-sm font-semibold transition duration-150 disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-primary { @apply bg-blue text-white hover:bg-blue-2; }
+  .btn-line { @apply border border-line-2 text-ink hover:border-blue hover:text-blue; }
+  .btn-ghost { @apply text-muted hover:bg-panel-2 hover:text-ink; }
+  .btn-danger { @apply bg-crit/90 text-white hover:bg-crit; }
+  .btn-lg { @apply px-6 py-3.5 text-[0.95rem]; }
+  .input { @apply w-full rounded-[10px] border border-line-2 bg-bg-2 px-3.5 py-2.5 text-sm text-ink placeholder:text-faint transition focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/30; }
+  .label { @apply mb-1.5 block text-[0.82rem] font-medium text-muted; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[0.72rem] font-semibold; }
+  .th { @apply px-3 py-2.5 text-left font-mono text-[0.68rem] font-medium uppercase tracking-wider text-faint; }
+  .td { @apply border-t border-line px-3 py-3 text-sm; }
+}
+
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes toastIn { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.rise { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+.toast-in { animation: toastIn .2s ease-out both; }
+.pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .no-print { display: none !important; }
+  .print-area { color: #111 !important; }
+  .print-area * { color: #111 !important; background: transparent !important; border-color: #ccc !important; box-shadow: none !important; }
+}

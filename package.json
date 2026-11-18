@@ -1,0 +1,32 @@
+{
+  "name": "veyroniq",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Veyroniq: predictive maintenance software for industrial equipment",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "assets": "node scripts/render-assets.mjs",
+    "check": "node scripts/check-answers.mjs",
+    "docs": "node scripts/generate-docs.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^6.3.12",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.14",
+    "@vitejs/plugin-react": "^4.3.4",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.14",
+    "vite": "^5.4.11"
+  }
+}
