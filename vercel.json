@@ -3,7 +3,6 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true,
   "rewrites": [{ "source": "/((?!assets/|favicon|robots|sitemap|.*\\..*).*)", "destination": "/200.html" }],
   "headers": [
     { "source": "/(app|dashboard|onboarding|login|signup|forgot-password)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
