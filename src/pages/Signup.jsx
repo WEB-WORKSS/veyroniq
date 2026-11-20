@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Check, Eye, EyeOff, MailCheck } from "lucide-react";
 import { AuthShell } from "../components/auth/AuthShell.jsx";
 import { Field, SubmitButton } from "../components/ui/primitives.jsx";
@@ -9,7 +9,7 @@ import { isEmail } from "../lib/utils.js";
 import { useToast } from "../hooks/useToast.jsx";
 
 export default function Signup() {
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const toast = useToast();
   const nav = useNavigate();
   const [step, setStep] = useState("form");
@@ -19,6 +19,8 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const pw = passwordStrength(v.password);
   const set = (k) => (e) => setV({ ...v, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value });
+
+  if (user && step === "form") return <Navigate to="/dashboard" replace />;
 
   const submit = async (e) => {
     e.preventDefault();

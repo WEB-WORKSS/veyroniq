@@ -7,7 +7,7 @@ export function Footer() {
   const cols = [
     ["Product", [["Product", "/#product"], ["How It Works", "/#how-it-works"], ["Sample workspace", "/dashboard"], ["Pricing", "/#pricing"]]],
     ["Solutions", [["Manufacturing", "/#solutions"], ["Food processing", "/#solutions"], ["Mining", "/#solutions"], ["Oil & gas", "/#solutions"]]],
-    ["Company", [["Technology", "/#technology"], ["Team", "/#team"], ["Contact", "/#contact"], ["FAQ", "/#faq"]]],
+    ["Company", [["Technology", "/#technology"], ["Team", "/#team"], ["Company & AWS info", "/app"], ["Contact", "/#contact"], ["FAQ", "/#faq"]]],
     ["Legal", [["Privacy Policy", "/privacy"], ["Terms of Service", "/terms"]]],
   ];
   return (

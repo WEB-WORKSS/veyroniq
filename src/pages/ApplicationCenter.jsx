@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Building2, Palette, Linkedin, ClipboardList, Network, Users, FileText, ListChecks, Download, Printer, RefreshCw, Copy, AlertTriangle, CheckCircle2, CircleDashed, ShieldAlert, Lock } from "lucide-react";
+import { Building2, Palette, Linkedin, ClipboardList, Network, Users, FileText, ListChecks, Download, Printer, RefreshCw, Copy, AlertTriangle, CheckCircle2, CircleDashed } from "lucide-react";
 import { LogoMark } from "../components/ui/Logo.jsx";
-import { Chip, CopyButton, Spinner } from "../components/ui/primitives.jsx";
-import { useAuth } from "../hooks/useAuth.jsx";
+import { Chip, CopyButton } from "../components/ui/primitives.jsx";
 import { business, aws, openItems } from "../data/business.js";
 import { linkedin } from "../data/linkedin.js";
 import { generateAnswers, answersAsText, businessDetails } from "../data/aws-answers.js";
@@ -52,7 +51,6 @@ function useChecklist() {
 }
 
 export default function ApplicationCenter() {
-  const { user, ready, configured } = useAuth();
   const toast = useToast();
   const [seed, setSeed] = useState(0);
   const answers = useMemo(() => generateAnswers(), [seed]);
@@ -60,12 +58,6 @@ export default function ApplicationCenter() {
   const open = openItems();
   const issues = answers.flatMap((a) => a.issues);
 
-  // With Cognito configured, only members of the admin group may open /app.
-  // NOTE: real protection also requires serving this build only behind authentication (see README).
-  if (configured && !ready) return <div className="grid min-h-screen place-items-center"><Spinner /></div>;
-  if (configured && !user?.isAdmin) return (
-    <div className="grid min-h-screen place-items-center p-6 text-center"><div><Lock className="mx-auto size-8 text-faint" /><h1 className="mt-4 text-2xl font-bold">Administrators only</h1><p className="mt-2 text-muted">Sign in with an administrator account to continue.</p><Link to="/login" state={{ from: "/app" }} className="btn btn-primary mt-6">Sign in</Link></div></div>
-  );
 
   const copyAll = async () => { if (await copyText(answersAsText(answers))) toast("All answers copied."); };
   const lkText = `Name: ${linkedin.name}\nWebsite: ${linkedin.website}\nIndustry: ${linkedin.industry}\nCompany size: ${linkedin.companySize}\nCompany type: ${linkedin.companyType}\nFounded: ${linkedin.founded}\nHeadquarters: ${linkedin.headquarters}\nPublic URL: linkedin.com/company/${linkedin.slug} (unconfirmed)\n\nTagline:\n${linkedin.tagline}\n\nOverview:\n${linkedin.overview}\n\nSpecialties:\n${linkedin.specialties.join(", ")}`;
@@ -73,7 +65,7 @@ export default function ApplicationCenter() {
   return (
     <div className="min-h-screen">
       <header className="no-print sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-xl">
-        <div className="wrap flex h-16 items-center gap-3"><Link to="/" aria-label="Home"><LogoMark /></Link><span className="font-display font-extrabold">Application center</span><Chip tone="critical" className="ml-2"><ShieldAlert className="size-3" />Private · not linked publicly</Chip>
+        <div className="wrap flex h-16 items-center gap-3"><Link to="/" aria-label="Veyroniq home"><LogoMark /></Link><span className="font-display font-extrabold">Company &amp; AWS Activate information</span>
           <div className="ml-auto hidden gap-2 sm:flex"><button className="btn btn-line" onClick={copyAll}><Copy className="size-4" />Copy all answers</button><button className="btn btn-primary" onClick={() => window.print()}><Printer className="size-4" />Print summary</button></div></div>
       </header>
       <div className="wrap grid gap-8 py-8 lg:grid-cols-[220px_1fr]">

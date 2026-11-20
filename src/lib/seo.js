@@ -9,7 +9,7 @@ export const routeMeta = {
   "/forgot-password": { title: `Reset password | ${business.name}`, description: "Reset your Veyroniq password.", noindex: true },
   "/onboarding": { title: `Set up workspace | ${business.name}`, description: "Set up your Veyroniq workspace.", noindex: true },
   "/dashboard": { title: `Workspace | ${business.name}`, description: "Veyroniq maintenance workspace.", noindex: true },
-  "/app": { title: `Application center | ${business.name}`, description: "Private.", noindex: true },
+  "/app": { title: `Company & AWS Activate information | ${business.name}`, description: "Veyroniq company facts, brand assets, LinkedIn profile details, AWS architecture and AWS Activate application answers." },
 };
 
 export const publicRoutes = ["/", "/privacy", "/terms"];

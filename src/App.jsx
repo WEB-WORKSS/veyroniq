@@ -14,9 +14,8 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 
 const Onboarding = lazy(() => import("./pages/Onboarding.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
-// The application center is only compiled in when allowed (dev, or an explicitly protected build).
-const APP_CENTER = import.meta.env.DEV || import.meta.env.VITE_ENABLE_APP_CENTER === "true";
-const ApplicationCenter = APP_CENTER ? lazy(() => import("./pages/ApplicationCenter.jsx")) : lazy(() => import("./pages/AppLocked.jsx"));
+// Public company & AWS Activate information page.
+const ApplicationCenter = lazy(() => import("./pages/ApplicationCenter.jsx"));
 
 class ErrorBoundary extends Component {
   state = { error: null };

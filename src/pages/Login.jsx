@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { AuthShell } from "../components/auth/AuthShell.jsx";
 import { Field, SubmitButton } from "../components/ui/primitives.jsx";
@@ -8,13 +8,14 @@ import { friendlyError } from "../lib/auth.js";
 import { isEmail } from "../lib/utils.js";
 
 export default function Login() {
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const nav = useNavigate();
-  const loc = useLocation();
   const [v, setV] = useState({ email: "", password: "", remember: true });
   const [show, setShow] = useState(false);
   const [err, setErr] = useState({});
   const [loading, setLoading] = useState(false);
+
+  if (user) return <Navigate to="/dashboard" replace />;
 
   const submit = async (e) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export default function Login() {
     setLoading(true);
     try {
       await signIn(v.email, v.password, v.remember);
-      nav(loc.state?.from || "/dashboard", { replace: true });
+      nav("/dashboard", { replace: true });
     } catch (ex) {
       setErr({ form: friendlyError(ex) });
     } finally { setLoading(false); }

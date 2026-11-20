@@ -18,7 +18,7 @@ npm run dev                  # http://localhost:5173
 
 | Script | What it does |
 |---|---|
-| `npm run dev` | Dev server (includes the private `/app` center) |
+| `npm run dev` | Dev server |
 | `npm run build` | Client build → SSR build → prerenders `/`, `/privacy`, `/terms` to static HTML |
 | `npm run preview` | Serve the production build |
 | `npm run check` | Validates all 14 AWS Activate answers and LinkedIn character limits |
@@ -33,7 +33,7 @@ npm run dev                  # http://localhost:5173
 | `/login`, `/signup`, `/forgot-password` | Authentication (Amazon Cognito) |
 | `/onboarding` | Workspace setup after sign-up |
 | `/dashboard` | Customer workspace: overview, assets, alerts, work orders, inspections, reports, activity, settings |
-| `/app` | Private founder application center (LinkedIn kit, AWS Activate answers, checklist) |
+| `/app` | Public company & AWS Activate information (brand assets, LinkedIn kit, AWS architecture and answers, checklist) |
 | `/privacy`, `/terms` | Legal (prerendered) |
 | anything else | 404 |
 
@@ -70,11 +70,9 @@ When `VITE_API_URL` is set and a user is signed in, the dashboard calls:
 
 Each request sends `Authorization: Bearer <Cognito ID token>`. The API must verify the token (API Gateway Cognito authorizer) and scope data to the user's organisation. Suggested build: API Gateway + Lambda + DynamoDB.
 
-### Private application center (`/app`)
+### Company & AWS Activate information (`/app`)
 
-`/app` is not linked anywhere and is `noindex`. Because this is a static site with no backend yet, **the application center is compiled only into `npm run dev`**. Public production builds ship a "Private area" page at `/app` instead, so the AWS answers and checklist are not in the public bundle.
-
-To use it: run `npm run dev` and open http://localhost:5173/app. Only set `VITE_ENABLE_APP_CENTER=true` for a deployment that is itself protected (for example a Vercel deployment with Password Protection, or once Cognito + an `admin` group are configured). The in-page admin-group check alone is client-side and is not sufficient protection.
+`/app` is public: anyone can open https://www.veyroniq.site/app. It shows the business record, brand assets, LinkedIn kit, AWS architecture and all 14 AWS Activate answers with copy and download buttons. The readiness checklist is saved in each visitor's own browser.
 
 Note: this repository is public, so `src/data/*` and `docs/*` (including the drafted AWS answers) are readable on GitHub. They contain no secrets.
 
